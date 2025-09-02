@@ -268,7 +268,6 @@ MIT License - see LICENSE file for details.
 - **MSI Afterburner**: For providing comprehensive hardware monitoring
 - **Pandas/NumPy**: For efficient data processing capabilities  
 - **Matplotlib/Seaborn**: For powerful visualization tools
-- **PostgreSQL**: For 
 
 ## Version History
 - v1.0.0 Initial version has everything that one needs. 
