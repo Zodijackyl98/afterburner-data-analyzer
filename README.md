@@ -2,6 +2,9 @@
 
 A comprehensive Python-based tool for analyzing CPU and GPU performance data from MSI Afterburner logs. This tool provides detailed visualizations and statistics for system monitoring data, perfect for gamers, overclockers, and system performance enthusiasts.
 
+#### Reminder
+ Make sure to enable logging parameters under monitoring section in the MSI Afterburner app and double check whether **log history to file** option is marked during recording process.
+
 ## Features
 
 ###  CPU Analysis
@@ -56,6 +59,7 @@ pip install pandas numpy matplotlib scikit-learn seaborn pathlib
 
 4. **Choose analysis options** from the interactive menu
 
+5. **Export your txt file into PostgreSQL database** using `aft_postgre.py`.
 ### Menu Options
 ```
 1 - CPU Temperature Analysis       Individual core and overall CPU temperatures
@@ -100,6 +104,7 @@ The tool automatically processes MSI Afterburner `.txt` log files with the follo
 - CPU usage, CPU1-CPUn usage
 - CPU clock, CPU1-CPUn clock
 - CPU power, Power consumption
+- For devices that have multiple GPUs; GPU1 usage, GPU1 temperature and GPU1 power options have been added, If they exist they will be drawn on graphs.
 
 ![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_temperature.png)
 
@@ -198,7 +203,7 @@ Estimated Cost (at TL 2.59/kWh): TL 0.1298
 ### Supported GPUs
 - **NVIDIA**: RTX 40/30/20/10 series, GTX 16/10 series
 - **AMD**: RX 7000/6000/5000 series, Radeon VII, Vega series
-- **Focus**: Discrete GPUs only (integrated graphics ignored)
+- **Focus**: Discrete GPUs only (integrated graphics ignored but can be manually added by changing GPU column names)
 - All feedbacks are welcome especially with unique setups.
 
 ### Supported CPUs
@@ -263,8 +268,10 @@ MIT License - see LICENSE file for details.
 - **MSI Afterburner**: For providing comprehensive hardware monitoring
 - **Pandas/NumPy**: For efficient data processing capabilities  
 - **Matplotlib/Seaborn**: For powerful visualization tools
+- **PostgreSQL**: For 
 
 ## Version History
+- v1.0.0 Initial version has everything that one needs. 
 
 ### v1.0.0 (Current)
 - Complete object-oriented rewrite
