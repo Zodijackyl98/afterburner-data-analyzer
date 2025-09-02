@@ -57,6 +57,9 @@ class PerformanceAnalyzer:
             # Process datetime
             self._process_datetime()
             
+            # Remove duplicate timestamps
+            self._remove_duplicate_timestamps()
+
             # Process framerate
             self.df_final['Framerate'] = pd.to_numeric(
                 self.df_final['Framerate'].replace('N/A', np.nan), 
@@ -92,6 +95,24 @@ class PerformanceAnalyzer:
             errors='coerce'
         )
     
+    def _remove_duplicate_timestamps(self):
+        initial_count = len(self.df_final)
+        
+        # Uncomment the method you prefer:
+        
+        # Method 1: Keep first (default)
+        self.df_final = self.df_final.drop_duplicates(subset=['format_time_aft'], keep='first')
+        
+        # Method 2: Keep last  
+        # self.df_final = self.df_final.drop_duplicates(subset=['format_time_aft'], keep='last')
+        
+        # Method 3: Average values
+        # self._average_duplicate_timestamps()
+        
+        final_count = len(self.df_final)
+        logger.info(f"Removed {initial_count - final_count} duplicates")
+
+
     def _determine_cpu_cores(self):
         """Determine the number of CPU cores from column names."""
         core_gen = [
@@ -148,6 +169,19 @@ class PerformanceAnalyzer:
             except OSError:
                 plt.style.use('default')
         
+        cpu_max_temp = self.df_final['CPU temperature'].max()
+
+
+        print(f"Maximum CPU Temperature Recorded: {cpu_max_temp}°C", 
+              "CPU Core Numbers that equals or exceeds reported max CPU Temperature",
+               "---------------------------------------------------------", sep = '\n')
+
+        for i in range(1, self.cpu_core_num + 1):
+            cpus_max_temp = self.df_final['CPU' + str(i) + ' temperature'].max()
+            if cpus_max_temp >= cpu_max_temp:
+                print(self.df_final['CPU' + str(i) + ' temperature'][self.df_final['CPU' + str(i) + ' temperature'] >= cpu_max_temp].name.split(' ')[0])
+
+
         fig, ax = plt.subplots(figsize=(12, 6))
         
         # Plot individual core temperatures
@@ -414,7 +448,9 @@ class PerformanceAnalyzer:
             logger.error("Data not loaded. Call load_data() first.")
             return
         
-        gpu_metrics = ['GPU temperature', 'GPU usage', 'Power percent', 'Power', 'Fan speed']
+        gpu_metrics = ['GPU temperature', 'GPU usage',
+                       'GPU1 temperature','GPU1 usage', 'GPU1 power', #for laptop users
+                       'Power percent', 'Power','Fan speed']
         available_metrics = [metric for metric in gpu_metrics if metric in self.df_final.columns]
         
         if not available_metrics:
@@ -467,7 +503,9 @@ class PerformanceAnalyzer:
         # Show statistics
         print("\nGPU Performance Statistics:")
         print("=" * 40)
-        stats = self.get_statistics(['GPU usage', 'GPU temperature', 'Power percent', 'Power', 'Fan speed', 'Framerate'])
+        stats = self.get_statistics(['GPU usage', 'GPU temperature', 
+                                     'GPU1 usage', 'GPU1 temperature', 'GPU1 power', #for laptop users
+                                     'Power percent', 'Power', 'Fan speed', 'Framerate'])
         print(stats)
     
     def get_statistics(self, metrics: Optional[list] = None) -> pd.DataFrame:
