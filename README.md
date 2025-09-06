@@ -5,6 +5,9 @@ A comprehensive Python-based tool for analyzing CPU and GPU performance data fro
 #### Reminder
  Make sure to enable logging parameters under monitoring section in the MSI Afterburner app and double check whether **log history to file** option is marked during recording process.
 
+![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/aft_settings.png)
+
+
 ## Features
 
 ###  CPU Analysis
@@ -35,6 +38,11 @@ A comprehensive Python-based tool for analyzing CPU and GPU performance data fro
 ### Prerequisites
 ```bash
 pip install pandas numpy matplotlib scikit-learn seaborn pathlib
+```
+Install additional libraries below if you want to use PostgreSQL.
+
+```bash
+pip install SQLAlchemy psycopg2
 ```
 
 ### Supported Python Versions
@@ -135,7 +143,7 @@ The tool automatically processes MSI Afterburner `.txt` log files with the follo
 ### Default Paths
 ```python
 # Default Afterburner log path (Windows)
-DEFAULT_PATH = r"C:\Python_Works\Extensions\texts\afterburner_intel_logs\afterburner\MHW.txt"
+DEFAULT_PATH = r"C:\Python_Works\py\afterburner-data-analyzer\examples\texts\HMW_MHW.txt"
 
 # Output directory for saved data
 OUTPUT_DIR = "output/"
