@@ -3,10 +3,11 @@
 A comprehensive Python-based tool for analyzing CPU and GPU performance data from MSI Afterburner logs. This tool provides detailed visualizations and statistics for system monitoring data, perfect for gamers, overclockers, and system performance enthusiasts.
 
 #### Reminder
- Make sure to enable logging parameters under monitoring section in the MSI Afterburner app and double check whether **log history to file** option is marked during recording process.
+ Make sure to enable logging parameters under monitoring section in the MSI Afterburner app and double check whether **log history to file** option is marked during recording process and unchecked to stop recording.
 
-![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/aft_settings.png)
+![setting_parameters](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/aft_settings.png)
 
+![log_history_to_file](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/msi_aft_log.png)
 
 ## Features
 
@@ -114,11 +115,11 @@ The tool automatically processes MSI Afterburner `.txt` log files with the follo
 - CPU power, Power consumption
 - For devices that have multiple GPUs; GPU1 usage, GPU1 temperature and GPU1 power options have been added, If they exist they will be drawn on graphs.
 
-![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_temperature.png)
+![cpu_temps](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_temperature.png)
 
-![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_usage.png)
+![cpu_usages](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_usage.png)
 
-![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_freqs.png)
+![cpu_freqs](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_freqs.png)
 
 **GPU Metrics:**
 - GPU temperature, GPU usage
@@ -126,9 +127,9 @@ The tool automatically processes MSI Afterburner `.txt` log files with the follo
 - Power, Power percent, Fan speed
 - Framerate (FPS)
 
-![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/gpu_stats.png)
+![gpu_stats](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/gpu_stats.png)
 
-![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/gpu_framerate.png)
+![gpu_framerate](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/gpu_framerate.png)
 
 
 **System Metrics:**
