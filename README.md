@@ -163,6 +163,9 @@ OUTPUT_DIR = "output/"
 - **Time-series Plots**: Performance metrics over time with trend analysis
 - **Performance Zones**: Color-coded efficiency and load indicators
 - **Statistical Overlays**: Average lines and performance thresholds
+- **Apache Superset (optional)**: Possible for users who know how to implement their database into Apache Superset for further analysis, example is given below.
+
+![Apache Superset](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/aft_log_superset_dashboard.png)
 
 ### Data Export
 ```
