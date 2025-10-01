@@ -206,14 +206,14 @@ class PerformanceAnalyzer:
         plt.show()
     
     def plot_cpu_power_analysis(self):
-        """Plot both CPU power percentage and power consumption in watts."""
+        """Plot both CPU/GPU power consumption in watts."""
         if self.df_final is None:
             logger.error("Data not loaded. Call load_data() first.")
             return
         
         # Check for available power columns
         power_percent_cols = ['CPU power', 'CPU Power %', 'CPU power percent']
-        power_watt_cols = ['Power', 'CPU power (W)', 'Power consumption', 'CPU Power Consumption']
+        power_watt_cols = ['Power']
         
         power_percent_col = None
         power_watt_col = None
@@ -263,17 +263,17 @@ class PerformanceAnalyzer:
             axes[0].axhspan(25, 75, alpha=0.1, color='yellow', label='Medium Load')
             axes[0].axhspan(75, 220, alpha=0.1, color='red', label='High Load')
             
-            axes[0].set_title('CPU Power Consumption (%)', fontsize=14, fontweight='bold')
-            axes[0].set_ylabel('CPU Power (%)')
+            axes[0].set_title('CPU Power Consumption (Watts)', fontsize=14, fontweight='bold')
+            axes[0].set_ylabel('CPU Power (Watts)')
             axes[0].set_ylim(0, 220)
             axes[0].set_yticks(np.arange(0, 230, 10))
             axes[0].grid(True, alpha=0.3)
             axes[0].legend(loc='upper left')
         else:
-            axes[0].text(0.5, 0.5, 'CPU Power (%) data not available', 
+            axes[0].text(0.5, 0.5, 'CPU Power (Watts) data not available', 
                         transform=axes[0].transAxes, ha='center', va='center', 
                         fontsize=12, color='gray')
-            axes[0].set_title('CPU Power Consumption (%) - No Data', fontsize=14, fontweight='bold')
+            axes[0].set_title('CPU Power Consumption (Watts) - No Data', fontsize=14, fontweight='bold')
         
         # Plot Power in Watts
         if power_watt_col:
@@ -300,16 +300,16 @@ class PerformanceAnalyzer:
                 axes[1].axhspan(85, max_power * 1.1, alpha=0.1, color='red', label='High Power')
                 tick_interval = 20
             
-            axes[1].set_title('CPU Power Consumption (Watts)', fontsize=14, fontweight='bold')
-            axes[1].set_ylabel('Power (Watts)')
+            axes[1].set_title('GPU Power Consumption (Watts)', fontsize=14, fontweight='bold')
+            axes[1].set_ylabel('GPU Power (Watts)')
             axes[1].set_yticks(np.arange(0, max_power + tick_interval, tick_interval))
             axes[1].grid(True, alpha=0.3)
             axes[1].legend(loc='upper left')
         else:
-            axes[1].text(0.5, 0.5, 'CPU Power (Watts) data not available', 
+            axes[1].text(0.5, 0.5, 'GPU Power (Watts) data not available', 
                         transform=axes[1].transAxes, ha='center', va='center', 
                         fontsize=12, color='gray')
-            axes[1].set_title('CPU Power Consumption (Watts) - No Data', fontsize=14, fontweight='bold')
+            axes[1].set_title('GPU Power Consumption (Watts) - No Data', fontsize=14, fontweight='bold')
         
         # Common settings
         axes[1].set_xlabel('Time')
@@ -319,18 +319,18 @@ class PerformanceAnalyzer:
         plt.show()
         
         # Print power statistics
-        print("\nCPU Power Statistics:")
+        print("\nGPU Power Statistics:")
         print("=" * 25)
         
         if power_percent_col:
             percent_stats = pd.to_numeric(self.df_final[power_percent_col], errors='coerce').agg(['mean', 'min', 'max', 'std']).round(2)
-            print(f"\nCPU Power Percentage ({power_percent_col}):")
+            print(f"\nGPU Power Watts({power_percent_col}):")
             for stat, value in percent_stats.items():
                 print(f"  {stat.capitalize()}: {value}%")
         
         if power_watt_col:
             watt_stats = pd.to_numeric(self.df_final[power_watt_col], errors='coerce').agg(['mean', 'min', 'max', 'std']).round(2)
-            print(f"\nCPU Power Consumption ({power_watt_col}):")
+            print(f"\nGPU Power Watts ({power_watt_col}):")
             for stat, value in watt_stats.items():
                 print(f"  {stat.capitalize()}: {value}W")
             
@@ -764,7 +764,7 @@ def main():
     # Get data path
     data_path = input("Enter path to Afterburner log file: ").strip()
     if not data_path:
-        data_path = r"C:\Python_Works\Extensions\texts\afterburner_intel_logs\afterburner\MHW.txt"
+        data_path = r"C:\Python_Works\py\afterburner-data-analyzer\examples\texts\HMW_MHW.txt"
     
     # Initialize analyzer
     analyzer = PerformanceAnalyzer(data_path)
@@ -777,7 +777,7 @@ def main():
         '1': ('CPU Temperature Analysis', analyzer.plot_cpu_temperatures),
         '2': ('CPU Usage Analysis', analyzer.plot_cpu_usage),
         '3': ('CPU Frequency Analysis', analyzer.plot_cpu_frequencies),
-        '4': ('CPU Power Analysis (% + Watts)', analyzer.plot_cpu_power_analysis),
+        '4': ('CPU/GPU Power Analysis (Watts)', analyzer.plot_cpu_power_analysis),
         '5': ('GPU Analysis (Complete)', analyzer.plot_gpu_analysis),
         '6': ('Framerate Analysis', analyzer.plot_framerate),
         '7': ('Memory Analysis (GPU + System RAM)', analyzer.plot_memory_usage),
