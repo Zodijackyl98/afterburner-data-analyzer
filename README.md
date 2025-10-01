@@ -207,7 +207,7 @@ Estimated Cost (at TL 2.59/kWh): TL 0.1298
 
 ```
 
-![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_power_consumption.png)
+![Description](https://github.com/Zodijackyl98/afterburner-data-analyzer/blob/main/examples/graphs/cpu_gpu_power_consumption.png)
 
 
 ## Hardware Compatibility
